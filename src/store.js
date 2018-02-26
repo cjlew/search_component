@@ -5,9 +5,12 @@ import createSagaMiddleware from "redux-saga";
 import freeze from "redux-freeze";
 import { reducers } from "./reducers/index";
 import { sagas } from "./sagas/index";
+import thunk from 'redux-thunk';
+import logger from 'redux-logger';
+
 
 // add the middlewares
-let middlewares = [];
+let middlewares = [thunk, logger];
 
 // add the router middleware
 middlewares.push(routerMiddleware(browserHistory));
