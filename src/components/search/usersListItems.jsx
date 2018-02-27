@@ -1,13 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router';
 
 const UserListItem = ({user}) => {
 
   return(
     <li className='search-index-item'>
-        <Link to={`${user.url}`}>
-          <p>user.login</p>
-        </Link>
+        <a href={`${user.html_url}`}>
+          <img src={`${user.avatar_url}`}></img>
+          <p>{`${user.login}`}</p>
+        </a>
     </li>
 
   );

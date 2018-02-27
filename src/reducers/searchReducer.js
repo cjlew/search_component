@@ -1,4 +1,4 @@
-import { RECEIVE_SEARCH, CLEAR_SEARCH } from './../sagas/search';
+import { RECEIVE_SEARCH, CLEAR_SEARCH } from './../sagas/search.js';
 
 const searchReducer = (state = {}, action) => {
   Object.freeze(state);

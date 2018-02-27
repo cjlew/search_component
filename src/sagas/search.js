@@ -8,7 +8,7 @@ export const clearSearchResults = () => ({
   type: CLEAR_SEARCH,
 });
 
-export const receiveSearchSongs= (results) => ({
+export const receiveSearch= (results) => ({
   type: RECEIVE_SEARCH,
   results
 });
@@ -19,5 +19,5 @@ export const clearSearch = () => (dispatch) => (
 
 export const search = (query) => (dispatch) => (
   SearchAPI.getUsers(query)
-    .then(results => dispatch(receiveSearchSongs(results)) )
+    .then(results => dispatch(receiveSearch(results)) )
 );

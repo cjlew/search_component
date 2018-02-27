@@ -4,14 +4,16 @@ import $ from 'jquery';
 export default class SearchAPI {
 
   static getUsers(query, token) {
-    $.ajax({
-      url: 'https://api.github.com/search/users',
-      type: 'GET',
-      headers: { 'access_token': token },
-      data : { 'q': query },
-    });
+    return (
+      $.ajax({
+        method: 'GET',
+        url: 'https://api.github.com/search/users',
+        parameter: {
+          access_token: 'OAUTH-dea71d1a6ce6c308e849490f703d9082809444f3'
+        },
+        data : { 'q': query },
+      })
+    );
   }
-
-
 
 }

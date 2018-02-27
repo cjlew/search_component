@@ -4,13 +4,8 @@ import Search from './search.jsx';
 import { clearSearch, search } from '../../sagas/search';
 
 const mapStateToProps = (state) => {
-  const users = [];
-
-  if (state.search) {
-      Object.values(state.search).forEach(user =>
-        users.push(user));
-      }
-
+  let users;
+  state.search.items ? users = state.search.items : users = [];
   return ({
    users
   });
@@ -18,7 +13,6 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    clearSearch: () => dispatch(clearSearch()),
     search: (query, token) => dispatch(search(query, token)),
   });
 

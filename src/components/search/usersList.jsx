@@ -12,9 +12,12 @@ export default class UsersList extends React.Component {
                                                 key={user.id}/>);
 
     return(
-      <ul id='users-results-list'>
-        {Users}
-      </ul>
+      <div>
+        <h3>Github Users</h3>
+        <ul id='users-results-list'>
+          {Users}
+        </ul>
+      </div>
     );
   }
 

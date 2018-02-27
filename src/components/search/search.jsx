@@ -21,7 +21,7 @@ export default class Search extends React.Component {
 
 
   render() {
-    const SearchResults = <UsersList users={this.props.users}/>;
+    const SearchResults = this.props.users.length > 0 ? <UsersList users={this.props.users}/> : "";
 
     return(
       <div id='search-container'>
