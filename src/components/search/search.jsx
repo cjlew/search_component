@@ -10,47 +10,69 @@ export default class Search extends React.Component {
       index: -1,
     };
     this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.newSearch = this.newSearch.bind(this);
+
   }
 
   handleKeyPress(e) {
+    //Switch statement to handle arrowup, enter and arrowdown
+    //All other keys are handled through default
     switch(e.key){
       case 'Enter':
-        this.state.selected ? browserHistory.push(`${htis.state.selected.html_url}`) : null ;
+        e.preventDefault();
+        // this.state.selected ? browserHistory.push(`${this.state.selected.html_url}`) : null ;
+        this.state.selected ? window.location.assign(`${this.state.selected.html_url}`) : null ;
+
         break;
+
       case 'ArrowDown':
-        if (this.state.index === -1) {
-          this.setState({
-            selected: this.props.users[0]
-          });
-          this.state.index += 1;
-        } else if (this.state.index === this.state.users.length -1) {
+        e.preventDefault();
+        if (this.state.index === this.props.users.length -1) {
           break;
         } else {
-          this.state.index += 1;
           this.setState({
-            selected: this.props.users[this.state.index]
+            selected: this.props.users[this.state.index+1],
+            index: this.state.index+1
           });
         }
         break;
+
       case 'ArrowUp':
+        e.preventDefault();
         if (this.state.index === 0) {
           break;
         } else {
-          this.state.index -= 1;
           this.setState({
-            selected: this.props.users[this.state.index]
+            selected: this.props.users[this.state.index-1],
+            index: this.state.index-1
           });
         }
         break;
+
+      // default:
+      //   this.setState ({
+      //     search: this.state.search + e.key
+      //   });
+      //   this.newSearch(e);
       }
+  }
 
-
+  newSearch(e) {
+    if (e.currentTarget.value === '') {
+      this.props.clearSearch();
+    } else {
+      this.props.search(e.currentTarget.value, this.state.token);
+    }
   }
 
   update(field) {
     return e => {
       if (e.currentTarget.value === '') {
         this.props.clearSearch();
+        this.setState({
+          selected: this.props.users[this.state.index]
+
+        })
       } else {
         this.props.search(e.currentTarget.value, this.state.token);
       }
@@ -66,11 +88,10 @@ export default class Search extends React.Component {
     let SearchResults = null;
     if (this.props.users.length > 0 && this.state.search !== "") {
         SearchResults = this.props.users.map(user =>
-          <li key={user.id} className={this.state.selected === user ?
-                                          'selected-search-index-item' :
-                                          'search-index-item'}>
+          <li key={user.id} className='search-index-item'>
               <a href={`${user.html_url}`}>
-                <div id='search-results'>
+                <div id={this.state.selected && this.state.selected.id === user.id ?
+                                                'selected' :'search-results'}>
                   <img id='search-result-avatar' src={`${user.avatar_url}`}></img>
                   <p id='search-result-login'>{`${user.login}`}</p>
                 </div>
@@ -85,18 +106,20 @@ export default class Search extends React.Component {
             placeholder={'Paste your Github Access Token Here!'}
             value={this.state.token}
             onChange={this.update('token')}/>
+
+
         <div id='searchbar-container'>
 
-        <input type='text'
-          id='search-bar'
-          placeholder={'Search'}
-          value={this.state.search}
-          onKeyPress={this.handleKeyPress}
-          onChange={this.update('search')}/>
+          <input type='text'
+            id='search-bar'
+            placeholder={'Search'}
+            value={this.state.search}
+            onKeyDown={this.handleKeyPress}
+            onChange={this.update('search')}/>
 
-        <ul id='users-results-list'>
-          {SearchResults}
-        </ul>
+          <ul id='users-results-list'>
+            {SearchResults}
+          </ul>
 
         </div>
 
