@@ -1,5 +1,4 @@
 import React from 'react';
-import { browserHistory } from 'react-router';
 
 export default class Search extends React.Component {
   constructor(props) {
@@ -20,9 +19,7 @@ export default class Search extends React.Component {
     switch(e.key){
       case 'Enter':
         e.preventDefault();
-        // this.state.selected ? browserHistory.push(`${this.state.selected.html_url}`) : null ;
         this.state.selected ? window.location.assign(`${this.state.selected.html_url}`) : null ;
-
         break;
 
       case 'ArrowDown':
@@ -48,12 +45,6 @@ export default class Search extends React.Component {
           });
         }
         break;
-
-      // default:
-      //   this.setState ({
-      //     search: this.state.search + e.key
-      //   });
-      //   this.newSearch(e);
       }
   }
 
@@ -71,8 +62,7 @@ export default class Search extends React.Component {
         this.props.clearSearch();
         this.setState({
           selected: this.props.users[this.state.index]
-
-        })
+        });
       } else {
         this.props.search(e.currentTarget.value, this.state.token);
       }
