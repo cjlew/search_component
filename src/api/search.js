@@ -9,7 +9,7 @@ export default class SearchAPI {
         method: 'GET',
         url: 'https://api.github.com/search/users',
         parameter: {
-          access_token: 'OAUTH-dea71d1a6ce6c308e849490f703d9082809444f3'
+          access_token: `OAUTH-${token}`
         },
         data : { 'q': query },
       })

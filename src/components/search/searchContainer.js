@@ -13,6 +13,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
+    clearSearch: () => dispatch(clearSearch),
     search: (query, token) => dispatch(search(query, token)),
   });
 

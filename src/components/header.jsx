@@ -4,7 +4,7 @@ const Header= () => {
 
   return(
     <div id='header'>
-      <h1>Github Users Search</h1>
+      <h1 id='header-text'>Github Users Search</h1>
     </div>
   );
 };
