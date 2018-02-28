@@ -1,5 +1,11 @@
 # Github Search Application
 
+### What is this?
+
+This is an auto complete search component that accesses Github's User Search API.
+
+This app was developed using React, Redux and AJAX.
+
 ### How to use this Application
 To search through Github users you will need a [Github Developer Token](https://github.com/settings/tokens/new).
 
